@@ -1,0 +1,322 @@
+/* Morandi green design tokens */
+:root {
+  /* Core palette */
+  --bg: #F5F0E8;
+  --bg-soft: #EEE7DC;
+  --bg-card: #FBF7F1;
+  --surface: #FFFFFF;
+
+  --primary: #8FAF9F;
+  --primary-soft: #C8D6CC;
+  --primary-faint: #E4EBE4;
+  --accent: #5C7A6B;
+  --accent-deep: #3E5648;
+
+  --ink: #2F3A34;
+  --ink-soft: #556259;
+  --muted: #A89F97;
+  --muted-soft: #C9C1B8;
+  --line: #E3DCCF;
+  --line-soft: #EDE6D8;
+
+  /* Payment method tints (morandi) */
+  --pm-cash:    #A8C2A5;  /* matcha */
+  --pm-credit:  #B6A994;  /* olive sand */
+  --pm-line:    #94B3A9;  /* sage teal */
+  --pm-apple:   #9D9489;  /* warm taupe */
+  --pm-bank:    #C4A8A0;  /* dusty rose */
+  --pm-custom:  #AFA9BD;  /* muted lilac */
+
+  /* Person accent */
+  --p-ava: #B9967E;   /* warm terracotta */
+  --p-kai: #7F9DAA;   /* dusty blue */
+
+  /* Soft morandi shadows */
+  --shadow-sm: 0 1px 2px rgba(92,122,107,0.06), 0 2px 6px rgba(92,122,107,0.04);
+  --shadow-md: 0 4px 12px rgba(92,122,107,0.08), 0 1px 3px rgba(92,122,107,0.05);
+  --shadow-lg: 0 18px 40px rgba(92,122,107,0.14), 0 4px 12px rgba(92,122,107,0.06);
+  --shadow-inset: inset 0 0 0 1px rgba(92,122,107,0.08);
+
+  --r-chip: 12px;
+  --r-card: 20px;
+  --r-hero: 28px;
+
+  --serif: "Cormorant Garamond", "Noto Serif TC", Georgia, serif;
+  --sans:  "DM Sans", "Noto Sans TC", system-ui, sans-serif;
+  --mono:  "DM Mono", "JetBrains Mono", ui-monospace, monospace;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  color: var(--ink);
+  background: #2a2722;
+  -webkit-font-smoothing: antialiased;
+}
+
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input, textarea { font-family: inherit; color: inherit; }
+
+/* App shell — phone stage */
+.stage {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(1200px 600px at 20% 10%, #3a362f 0%, #1f1c18 60%, #141210 100%);
+}
+.phone {
+  width: 390px;
+  height: 844px;
+  background: var(--bg);
+  border-radius: 44px;
+  overflow: hidden;
+  position: relative;
+  box-shadow:
+    0 0 0 10px #1a1815,
+    0 0 0 11px #2a2520,
+    0 50px 90px rgba(0,0,0,0.55),
+    0 20px 40px rgba(0,0,0,0.3);
+}
+.phone-inner {
+  width: 100%; height: 100%;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+.notch {
+  position: absolute; top: 10px; left: 50%;
+  transform: translateX(-50%);
+  width: 110px; height: 30px;
+  background: #111;
+  border-radius: 18px;
+  z-index: 200;
+}
+.home-bar {
+  position: absolute; bottom: 8px; left: 50%;
+  transform: translateX(-50%);
+  width: 130px; height: 4px;
+  background: rgba(47,58,52,0.35);
+  border-radius: 4px;
+  z-index: 200;
+}
+
+/* Status bar */
+.status-bar {
+  height: 44px;
+  padding: 14px 28px 0;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 14px; font-weight: 600; color: var(--ink);
+  flex-shrink: 0;
+}
+
+/* Scroll region */
+.scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+.scroll::-webkit-scrollbar { display: none; }
+
+/* Page transitions */
+.page-enter {
+  animation: pageIn 280ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+@keyframes pageIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in { animation: fadeIn 240ms ease both; }
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Generic */
+.hairline { border-bottom: 1px solid var(--line-soft); }
+.num { font-family: var(--mono); font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+.serif { font-family: var(--serif); letter-spacing: 0.005em; }
+
+/* Tab bar */
+.tabbar {
+  position: relative;
+  height: 84px;
+  flex-shrink: 0;
+  background: rgba(251, 247, 241, 0.92);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border-top: 1px solid var(--line-soft);
+  padding: 10px 16px 24px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  align-items: start;
+}
+.tab-btn {
+  display: flex; flex-direction: column;
+  align-items: center; gap: 4px;
+  padding-top: 6px;
+  font-size: 10px; letter-spacing: 0.04em;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.tab-btn.active { color: var(--accent); }
+.tab-btn.active .tab-icon { color: var(--accent); }
+.tab-icon { color: var(--muted); }
+
+.fab-tab {
+  position: relative;
+  display: flex; justify-content: center;
+}
+.fab {
+  position: absolute;
+  top: -22px;
+  width: 58px; height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(155deg, #9FBFAF 0%, #5C7A6B 100%);
+  color: #fbf7f1;
+  display: grid; place-items: center;
+  box-shadow:
+    0 10px 20px rgba(92,122,107,0.35),
+    0 3px 8px rgba(92,122,107,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.25);
+  transition: transform 0.2s;
+}
+.fab:active { transform: scale(0.94); }
+
+/* Chip (payment method, filter, etc.) */
+.chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--r-chip);
+  font-size: 13px; font-weight: 500;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--ink-soft);
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+.chip.active {
+  background: var(--accent);
+  color: #fbf7f1;
+  border-color: var(--accent);
+  box-shadow: 0 4px 10px rgba(92,122,107,0.25);
+}
+.chip-pm {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 8px;
+  border-radius: 8px;
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Card base */
+.card {
+  background: var(--surface);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-sm);
+}
+.card-soft {
+  background: var(--bg-card);
+  border-radius: var(--r-card);
+  box-shadow: var(--shadow-inset);
+}
+
+/* Pressable */
+.pressable { transition: transform 0.12s, opacity 0.12s; }
+.pressable:active { transform: scale(0.98); opacity: 0.85; }
+
+/* Progress */
+.progress-track {
+  height: 6px; border-radius: 6px;
+  background: var(--primary-faint);
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary) 0%, var(--accent) 100%);
+  border-radius: 6px;
+  transition: width 0.5s cubic-bezier(0.22,1,0.36,1);
+}
+
+/* Utility */
+.row { display: flex; align-items: center; }
+.col { display: flex; flex-direction: column; }
+.between { justify-content: space-between; }
+.center { justify-content: center; align-items: center; }
+
+/* Icon circles */
+.cat-icon {
+  width: 40px; height: 40px;
+  border-radius: 14px;
+  display: grid; place-items: center;
+  font-size: 18px;
+  background: var(--primary-faint);
+  flex-shrink: 0;
+}
+
+/* Sheet */
+.sheet-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(47, 58, 52, 0.35);
+  z-index: 300;
+  animation: fadeIn 200ms ease both;
+}
+.sheet {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  background: var(--bg);
+  border-radius: 28px 28px 0 0;
+  padding: 20px 20px 28px;
+  z-index: 301;
+  max-height: 90%;
+  overflow-y: auto;
+  animation: sheetIn 320ms cubic-bezier(0.22,1,0.36,1) both;
+}
+.sheet::-webkit-scrollbar { display: none; }
+@keyframes sheetIn {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+.sheet-handle {
+  width: 40px; height: 4px;
+  background: var(--muted-soft);
+  border-radius: 4px;
+  margin: 0 auto 16px;
+}
+
+/* Input reset */
+.input {
+  width: 100%;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 14px;
+  padding: 12px 14px;
+  font-size: 15px;
+  color: var(--ink);
+  outline: none;
+  transition: border 0.15s;
+}
+.input:focus { border-color: var(--primary); }
+
+/* Label */
+.label {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Divider with caption */
+.section-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--ink);
+  letter-spacing: 0.01em;
+}
